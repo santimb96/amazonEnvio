@@ -7,6 +7,7 @@ class Envio {
         this.enviado = false;
         this.reparto = false;
         this.recibido = false;
+        this.cancelado = false;
     }
 
     pagar() {
@@ -45,6 +46,15 @@ class Envio {
             alert("No se ha repartido aún");
         }
     }
+    cancelarEnvio(){
+        if(this.enviado === false && this.cancelado === false){
+            this.pagado = false;
+            this.cancelado = true;
+            alert("Se ha cancelado el proceso de envío y devuelto el dinero");
+        } else {
+            alert("Se ha enviado el paquete. No es posible su cancelación");
+        }
+    }
 
     mostrarEstadoPedido() {
         return `ID: <b>${this.num}</b><br>
@@ -53,14 +63,16 @@ class Envio {
         PAGADO: <b>${this.pagado}</b><br>
         ENVIADO: <b>${this.enviado}</b><br>
         REPARTO: <b>${this.reparto}</b><br>
-        ENTREGADO: <b>${this.recibido}</b><br>`;
+        ENTREGADO: <b>${this.recibido}</b><br><br>
+        CANCELADO: <b>${this.cancelado}</b><br>`;
     }
 
     testApp() {
         envio1.pagar();
-        envio1.enviar();
-        envio1.repartir();
-        envio1.recibir();
+        //envio1.enviar();
+        envio1.cancelarEnvio();
+        /*envio1.repartir();
+        envio1.recibir();*/
 
         this.printarHTML();
     }
@@ -72,7 +84,7 @@ class Envio {
 }
 
 const generarItem = () => {
-    envio1 = new Envio("01", "pesa", fecha = new Date());
+    envio1 = new Envio("01", "pesa", fecha = new Date().toLocaleString('es-ES'));
     envio1.testApp();
 }
 
